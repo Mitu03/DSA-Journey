@@ -1,13 +1,17 @@
-/**
- * @param {string} s
- * @return {number}
- */
 var lengthOfLastWord = function(s) {
-      s = s.trim();
-    
-    // 2. Split the string into words
-    let words = s.split(" ");
-    
-    // 3. Return the length of the last word
-    return words[words.length - 1].length;
+    let i = s.length - 1;
+    let length = 0;
+
+    // 1️⃣ Skip trailing spaces
+    while (i >= 0 && s[i] === ' ') {
+        i--;
+    }
+
+    // 2️⃣ Count characters until next space (or start of string)
+    while (i >= 0 && s[i] !== ' ') {
+        length++;
+        i--;
+    }
+
+    return length;
 };
