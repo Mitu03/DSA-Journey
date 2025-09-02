@@ -1,21 +1,26 @@
-/**
- * @param {string} s
- * @return {boolean}
- */
 var isPalindrome = function(s) {
-    let left = 0, right = s.length-1;
+  // helper: check if a character is alphanumeric
+  const isAlphaNum = (ch) => {
+    return /[a-zA-Z0-9]/.test(ch);
+  };
 
-    while(left < right){
-       while(left < right && !isPlan(s[left])) left++;
-       while(left < right && !isPlan(s[right])) right--;
+  let left = 0, right = s.length - 1;
 
-       if(s[left].toLowerCase() !== s[right].toLowerCase()) return false;
-       left++;
-       right--;
+  while (left < right) {
+    // skip left non-alphanumeric
+    while (left < right && !isAlphaNum(s[left])) left++;
+
+    // skip right non-alphanumeric
+    while (left < right && !isAlphaNum(s[right])) right--;
+
+    // compare (case-insensitive)
+    if (s[left].toLowerCase() !== s[right].toLowerCase()) {
+      return false; // mismatch
     }
-    return true;
 
-    function isPlan(char){
-        return /[a-zA-Z0-9]/.test(char)
-    }
+    left++;
+    right--;
+  }
+
+  return true; // fully matched
 };
